@@ -1,0 +1,62 @@
+{
+  "SC1": [
+    {
+      "fixture": "early_max",
+      "expected_selected": 1,
+      "original_pass": false,
+      "repair_pass": true
+    },
+    {
+      "fixture": "later_max",
+      "expected_selected": 2,
+      "original_pass": false,
+      "repair_pass": true
+    },
+    {
+      "fixture": "tied_max",
+      "expected_selected": 1,
+      "original_pass": false,
+      "repair_pass": true
+    }
+  ],
+  "SC2": [
+    {
+      "fixture": "early_best",
+      "expected_selected": 0.8,
+      "original_pass": false,
+      "repair_pass": true
+    },
+    {
+      "fixture": "later_best",
+      "expected_selected": 0.9,
+      "original_pass": false,
+      "repair_pass": true
+    }
+  ],
+  "SC3": [
+    {
+      "fixture": "isear_all_codes",
+      "expectation": "no surprise column",
+      "original_pass": false,
+      "repair_pass": true
+    },
+    {
+      "fixture": "brighter_missing_col",
+      "expectation": "reject missing column",
+      "original_pass": false,
+      "repair_pass": true
+    },
+    {
+      "fixture": "brighter_nonbinary",
+      "expectation": "reject nonbinary target",
+      "original_pass": false,
+      "repair_pass": true
+    },
+    {
+      "fixture": "valid_schema_control",
+      "expectation": "accept valid schema",
+      "original_pass": true,
+      "repair_pass": true
+    }
+  ]
+}

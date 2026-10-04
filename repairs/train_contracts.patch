@@ -1,0 +1,12 @@
+--- a/train.py
++++ b/train.py
+@@ -206,7 +206,8 @@
+         val_macro = f1_score(trues, pred_bin, average='macro', zero_division=0)
+         if val_macro > best_val_f1:
+             best_val_f1 = val_macro
+-            best_state = model.state_dict()
++            import copy
++            best_state = copy.deepcopy(model.state_dict())
+ 
+     model.load_state_dict(best_state)
+ 

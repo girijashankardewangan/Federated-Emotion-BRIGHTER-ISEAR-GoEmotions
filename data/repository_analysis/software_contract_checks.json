@@ -1,0 +1,46 @@
+{
+  "files": {
+    "results.csv": {
+      "sha256": "889d57db42a63051d1c3d7228c22354be2515a9350ffd3d47b1407a58c9447ba",
+      "size": 3366
+    },
+    "goemotions_results.csv": {
+      "sha256": "9d278df36781fd837c07e007bd63877eab6eca871112298f9f3dfe431db0e349",
+      "size": 820
+    },
+    "train.py": {
+      "sha256": "4fd4a6b9fd4f42e64fb8f160d8645035c31149084fae267c6ffc51d807fed55b",
+      "size": 15410
+    }
+  },
+  "checks": {
+    "grid_rows": 80,
+    "f1_f2_equal": 60,
+    "f1_f2_total": 60,
+    "f3": {
+      "total_f3": 20,
+      "zero_macro": 20
+    },
+    "ast": {
+      "SC1": {
+        "line": 209,
+        "issue": "state_dict without deepcopy",
+        "confirmed": true
+      },
+      "SC2": {
+        "accepts_val_df": true,
+        "uses_val_df": false
+      },
+      "SC3": {
+        "labels": [
+          "joy",
+          "anger",
+          "fear",
+          "sadness",
+          "surprise"
+        ],
+        "has_surprise": true
+      }
+    }
+  }
+}
