@@ -1,0 +1,31 @@
+{
+  "SC1_pytorch": [
+    {
+      "fixture": "early_max",
+      "expected_saved_value": 1.0,
+      "original_saved_value": 3.0,
+      "repair_saved_value": 1.0,
+      "original_pass": false,
+      "repair_pass": true
+    },
+    {
+      "fixture": "later_max",
+      "expected_saved_value": 2.0,
+      "original_saved_value": 3.0,
+      "repair_saved_value": 2.0,
+      "original_pass": false,
+      "repair_pass": true
+    },
+    {
+      "fixture": "tied_max",
+      "expected_saved_value": 1.0,
+      "original_saved_value": 3.0,
+      "repair_saved_value": 1.0,
+      "original_pass": false,
+      "repair_pass": true
+    }
+  ],
+  "original_pass_count": 0,
+  "repair_pass_count": 3,
+  "total": 3
+}
