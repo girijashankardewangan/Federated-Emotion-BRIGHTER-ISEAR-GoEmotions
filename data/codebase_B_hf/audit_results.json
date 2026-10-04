@@ -1,0 +1,24 @@
+{
+  "codebase": "huggingface/transformers examples/pytorch/text-classification/run_glue.py",
+  "file_size_bytes": 27501,
+  "line_count": 646,
+  "audit_date": "2026-10-04",
+  "contracts": {
+    "SC1_checkpoint_immutability": {
+      "status": "compliant",
+      "evidence": "Trainer class handles selection; save_model() serializes properly"
+    },
+    "SC2_validation_semantics": {
+      "status": "compliant",
+      "evidence": "eval_dataset constructed (line 485), passed to Trainer (541), used (582)"
+    },
+    "SC3_schema_validation": {
+      "status": "compliant",
+      "evidence": "label_list derivation (343-344); explicit consistency check with error (415-426)"
+    },
+    "SC4_provenance": {
+      "status": "partial",
+      "evidence": "model_revision supported (200-202); propagated to model/tok/config (368,376,385); not enforced"
+    }
+  }
+}
