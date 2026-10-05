@@ -1,0 +1,126 @@
+{
+  "generated_at_utc": "2026-10-05T13:36:33.281024Z",
+  "historical_results_preserved": true,
+  "files": {
+    "figures/fig1_brighter_comparison.pdf": {
+      "sha256": "60ae5b3b8d38d29b5f9c96515c1e51fe79a4249386c48a906cda56331078ee56",
+      "size_bytes": 14279
+    },
+    "figures/fig1_brighter_comparison.png": {
+      "sha256": "bfe72f5d50f933a534ee69a1b44657a50f5fbf8c02f18044be104a094313433d",
+      "size_bytes": 72997
+    },
+    "figures/fig2_brighter_boxplot.pdf": {
+      "sha256": "cf5327a9a954bfd0c04740ce3f4fff09a851909096b86ffe38b06f5e78b571b8",
+      "size_bytes": 22637
+    },
+    "figures/fig2_brighter_boxplot.png": {
+      "sha256": "9881af401ce56a1e6a9df4cd7204e458f321d9315372f1e467bf944e13f0a3b3",
+      "size_bytes": 143717
+    },
+    "figures/fig2_isear_comparison.pdf": {
+      "sha256": "5c9c5ee42acdc73adff81ddb16b6f90ce7e563e8322393dabf739680786c8c3e",
+      "size_bytes": 13870
+    },
+    "figures/fig2_isear_comparison.png": {
+      "sha256": "e0d5a7b4d8e7d7d0e5e51dcdf238670f70a1f3175c814faa78286e90b5ed5439",
+      "size_bytes": 80224
+    },
+    "figures/fig3_cross_dataset.pdf": {
+      "sha256": "c0450cf0a0931c20ff61878209e1165985ac0c07daf30130c4542293da9778d2",
+      "size_bytes": 20639
+    },
+    "figures/fig3_cross_dataset.png": {
+      "sha256": "b3df4f6519e99d6039d4cfa08e33aa449b13f7762f29c85c3da5141a273fc863",
+      "size_bytes": 131599
+    },
+    "figures/fig3_goemotions_comparison.pdf": {
+      "sha256": "416de8ea240f2cc8ee0bacf125afaa9fd808ccc8822ffebfd5fded3c72408102",
+      "size_bytes": 12969
+    },
+    "figures/fig3_goemotions_comparison.png": {
+      "sha256": "14e60bb2e03bc398357e6bf1f142bd90b63eca57505a5417e19f39fa337f55a5",
+      "size_bytes": 96323
+    },
+    "figures/fig4_cross_dataset_macro.pdf": {
+      "sha256": "187264769f41bec940bea442267cc816a55ff6230e8887026288869c44940ace",
+      "size_bytes": 14436
+    },
+    "figures/fig4_cross_dataset_macro.png": {
+      "sha256": "8da010185b9a2cec9a6b5f90af53fdd57e2b2d33af6f61678c0a53d4095850c6",
+      "size_bytes": 114944
+    },
+    "figures/fig4_per_seed.pdf": {
+      "sha256": "9917554f2aed75a2dda2e7df0dfafa883f3d6585f254268586086f05f99a5994",
+      "size_bytes": 23953
+    },
+    "figures/fig4_per_seed.png": {
+      "sha256": "3b06c937615da2eb7f7fc604345046d7b8871627708166651da72db99ae8fae3",
+      "size_bytes": 287057
+    },
+    "figures/fig5_cross_dataset_micro.pdf": {
+      "sha256": "d76e8fae9f9079518aa1188dcde3081b58349519e97023194eaec0c7ad8f55ce",
+      "size_bytes": 13983
+    },
+    "figures/fig5_cross_dataset_micro.png": {
+      "sha256": "f9c3190eb4ad2c84eef0c631c09093418d138044c1c1aa9e66c6e7fa148929c5",
+      "size_bytes": 81746
+    },
+    "figures/fig5_stability.pdf": {
+      "sha256": "9c914c253614f127e7aa666150b4c31626c44cd0aae330b68d9211d3f0fd11c7",
+      "size_bytes": 20570
+    },
+    "figures/fig5_stability.png": {
+      "sha256": "7d37b7e337170e7b3bbf90fcb54296bbf92c2de91b6efaa6363b2a8df57c3a88",
+      "size_bytes": 103837
+    },
+    "figures/fig6_brighter_per_seed.pdf": {
+      "sha256": "df0b6e6743ff493111b43e0f77230ccb2979773eca14aae4e86e0b485939a3c6",
+      "size_bytes": 15513
+    },
+    "figures/fig6_brighter_per_seed.png": {
+      "sha256": "7e7af5b3414fe7913b7088e289361952ab5c844aa2f32f11fb23f67d9c1fb26b",
+      "size_bytes": 165242
+    },
+    "figures/fig7_brighter_boxplot.pdf": {
+      "sha256": "6813a2dff63c15780b42d3627d42728202b4b654f274c56bfdb9b32209817467",
+      "size_bytes": 15367
+    },
+    "figures/fig7_brighter_boxplot.png": {
+      "sha256": "16717ecf4ec12f1fa1bf23b10e74390928c307a27c8c1ace2fe3bad8ab1abf5a",
+      "size_bytes": 87181
+    },
+    "figures/fig8_stability_comparison.pdf": {
+      "sha256": "bee30bbe9d049c7f10dbe67fa97a1e507da1e1a5c1a83c95a78b299786cb1967",
+      "size_bytes": 15025
+    },
+    "figures/fig8_stability_comparison.png": {
+      "sha256": "e439cdc5760ef7b1de36bcf889d50a38e84aca51e09dcb95d91c67873162dce6",
+      "size_bytes": 119942
+    },
+    "tables/brighter_summary.csv": {
+      "sha256": "6cb5f6a57bf1c72663f13f4959167569b5507d8ec07ea55bf3725480648495cd",
+      "size_bytes": 279
+    },
+    "tables/combined_cross_dataset.csv": {
+      "sha256": "df675511425e6f4ff754ac9e1e7b3b81d9093c7ee4071620174aa64ed6e62dbd",
+      "size_bytes": 635
+    },
+    "tables/cross_dataset_table.tex": {
+      "sha256": "9cb4ea16d51be053fabf19b755c7a5c19c0d3efefe111a557530576057ab2478",
+      "size_bytes": 1394
+    },
+    "tables/final_summary.json": {
+      "sha256": "b6c3d1aca0da3cd6895fd9dfcec873081b5e05683e3177b16589053d0d75c476",
+      "size_bytes": 383
+    },
+    "tables/goemotions_summary.csv": {
+      "sha256": "537f4c911b677f80538600888f821c26c5515f00b7cf4fb3d666665f54398031",
+      "size_bytes": 266
+    },
+    "tables/isear_summary.csv": {
+      "sha256": "effb1f034cf5d05da6b3f6fec640a195c5d3929890c01fd82f73b44ecb4ef542",
+      "size_bytes": 246
+    }
+  }
+}

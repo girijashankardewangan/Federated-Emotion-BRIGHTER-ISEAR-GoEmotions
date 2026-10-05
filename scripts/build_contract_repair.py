@@ -1,33 +1,38 @@
-import os
-REPO_ROOT = "/content/Federated-Emotion-BRIGHTER-ISEAR-GoEmotions"
-import difflib
+#!/usr/bin/env python3
 
-REPAIRS = [
-    {
-        "anchor": "best_state = model.state_dict()",
-        "replacement": "import copy\n            best_state = copy.deepcopy(model.state_dict())",
+import hashlib
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+repair = ROOT / 'repairs' / 'train_corrected.py'
+patch = ROOT / 'repairs' / 'train_contracts.patch'
+outdir = ROOT / 'data' / 'repository_analysis'
+outdir.mkdir(parents=True, exist_ok=True)
+
+def sha256(path):
+    h = hashlib.sha256()
+    with path.open('rb') as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+metadata = {
+    'historical_train_py_preserved': (ROOT / 'train.py').exists(),
+    'candidate_repair': str(repair.relative_to(ROOT)),
+    'candidate_repair_sha256': sha256(repair),
+    'patch': str(patch.relative_to(ROOT)),
+    'patch_sha256': sha256(patch),
+    'historical_results_preserved': {
+        'results.csv': (ROOT / 'results.csv').exists(),
+        'goemotions_results.csv': (ROOT / 'goemotions_results.csv').exists(),
     },
-]
+}
 
-def main():
-    src = os.path.join(REPO_ROOT, "train.py")
-    with open(src) as f:
-        original = f.read()
-    repaired = original
-    for r in REPAIRS:
-        if r["anchor"] in repaired:
-            repaired = repaired.replace(r["anchor"], r["replacement"], 1)
-    diff = difflib.unified_diff(
-        original.splitlines(keepends=True),
-        repaired.splitlines(keepends=True),
-        fromfile="a/train.py", tofile="b/train.py",
-    )
-    patch = "".join(diff)
-    os.makedirs(os.path.join(REPO_ROOT, "repairs"), exist_ok=True)
-    out = os.path.join(REPO_ROOT, "repairs/train_contracts.patch")
-    with open(out, "w") as f:
-        f.write(patch)
-    print(f"Patch: {out} ({len(patch.splitlines())} lines)")
+output = outdir / 'repair_build_metadata.json'
+output.write_text(
+    json.dumps(metadata, indent=2),
+    encoding='utf-8'
+)
 
-if __name__ == "__main__":
-    main()
+print(f'Wrote {output}')

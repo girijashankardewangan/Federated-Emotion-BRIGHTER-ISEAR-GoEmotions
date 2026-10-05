@@ -1,0 +1,20 @@
+{
+  "generated_at_utc": "2026-10-05T13:36:33.370634Z",
+  "files": {
+    "brighter_summary.csv": {
+      "exists": true,
+      "sha256": "49c54e8f0d42284f5fa7c49ea1574d0ddacd046dd10d8d564d76fd4e2f8b9cc0",
+      "size_bytes": 249
+    },
+    "isear_summary.csv": {
+      "exists": true,
+      "sha256": "a677274f4a7fcca559d5b78a484fe7aea11d8c979ded4d6c0ea30af7f2b5565b",
+      "size_bytes": 224
+    },
+    "goemotions_summary.csv": {
+      "exists": true,
+      "sha256": "67d0f6676582a3d3f87f024c83f3bb5a181dd8a89f2daa8a8b9a3bc6149eff5e",
+      "size_bytes": 214
+    }
+  }
+}

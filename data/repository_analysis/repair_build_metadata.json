@@ -1,0 +1,11 @@
+{
+  "historical_train_py_preserved": true,
+  "candidate_repair": "repairs/train_corrected.py",
+  "candidate_repair_sha256": "a2fc9a9bf339840cd78e0b9932c29d7912d31c653637e869aab78f642728c929",
+  "patch": "repairs/train_contracts.patch",
+  "patch_sha256": "e4b22bb9eb008876483403e5facfd9daff782f9545dceded701aad3e2f45c207",
+  "historical_results_preserved": {
+    "results.csv": true,
+    "goemotions_results.csv": true
+  }
+}

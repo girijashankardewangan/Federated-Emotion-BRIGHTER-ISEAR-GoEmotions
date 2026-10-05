@@ -1,144 +1,98 @@
-# Auditing Centralized and Federated NLP Software: A Case Study of Released DistilBERT Emotion-Classification Experiments
+# Federated Emotion — BRIGHTER, ISEAR, and GoEmotions
 
-This repository contains the code, results, and audit artifacts for a software-audit case study of centralized and federated DistilBERT training for multi-label emotion classification.
+This repository accompanies the audit and reproducibility analysis
+of the released DistilBERT federated-emotion implementation and its
+historical experiment records.
 
-## Overview
+## Historical experiment record
 
-Released machine-learning software can expose training logic without documenting how each reported run was produced. This study audits one centralized and federated DistilBERT codebase and 80 released emotion-classification runs across three task settings:
+The repository preserves 80 historical run records:
 
-- BRIGHTER English (10 seeds per method)
-- Filtered ISEAR (5 seeds per method)
-- Filtered GoEmotions (5 seeds per method)
+- BRIGHTER English: 40 runs (10 seeds × 4 methods)
+- Filtered ISEAR: 20 runs (5 seeds × 4 methods)
+- Filtered GoEmotions: 20 runs (5 seeds × 4 methods)
 
-Four training configurations are compared:
+Historical records are preserved in:
 
-| ID | Configuration | Description |
-|----|---------------|-------------|
-| C1 | Centralized | Standard centralized DistilBERT training |
-| F1 | FedAvg | Federated averaging without update perturbation |
-| F2 | FedAvg + Clipping | FedAvg with completed-update clipping (C = 1.0) |
-| F3 | FedAvg + Clipping + Noise | FedAvg with clipping and Gaussian noise (sigma = 1.1) |
+- `results.csv`
+- `goemotions_results.csv`
+- `data/repository_analysis/released_results_80.csv`
 
-## Repository Contents
+The historical results are preserved as reported. They are not
+silently regenerated from the candidate repair.
 
-- README.md : This file
-- train.py : Full training code (C1, F1, F2, F3)
-- results.csv : 60 BRIGHTER/ISEAR run results
-- geometries_results.csv : 20 GoEmotions run results
-- progress.json : Checkpoint progress for resuming
-- brighter_summary.csv : BRIGHTER mean +/- SD
-- isear_summary.csv : ISEAR mean +/- SD
-- figures/ : Publication figures (PNG + PDF, 300 DPI)
-- data/repository_analysis/paired_tests.csv : Exploratory seed-paired macro F1 tests
+## Software-contract findings
 
-## Key Results
+The audit identified three principal software issues in the released
+implementation:
 
-### BRIGHTER English (10 seeds per method)
+1. Centralized checkpoint selection stores `model.state_dict()`
+   without deep-copying the selected state.
+2. The federated routine accepts `val_df` but does not use it to
+   select the best communication round; the final round is evaluated.
+3. Filtered ISEAR retains the shared five-output head even though
+   only joy, fear, anger, and sadness are retained.
 
-| Method | Macro F1 | Micro F1 | Exact Match |
-|--------|----------|----------|-------------|
-| C1 | 0.1343 +/- 0.0264 | 0.4077 +/- 0.0988 | 0.1245 +/- 0.0037 |
-| F1 | 0.1317 +/- 0.0403 | 0.3498 +/- 0.1389 | 0.1145 +/- 0.0256 |
-| F2 | 0.1317 +/- 0.0403 | 0.3498 +/- 0.1389 | 0.1145 +/- 0.0256 |
-| F3 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 | 0.1055 +/- 0.0000 |
+These are software-contract findings. They should not be presented
+as causal explanations for all historical model outcomes.
 
-### Filtered ISEAR (5 seeds per method)
+## Candidate repair
 
-| Method | Macro F1 | Micro F1 | Exact Match |
-|--------|----------|----------|-------------|
-| C1 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 |
-| F1 | 0.0167 +/- 0.0228 | 0.0322 +/- 0.0477 | 0.0205 +/- 0.0322 |
-| F2 | 0.0167 +/- 0.0228 | 0.0322 +/- 0.0477 | 0.0205 +/- 0.0322 |
-| F3 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 |
+The historical `train.py` is intentionally preserved.
 
-### Filtered GoEmotions (5 seeds per method)
+A candidate repair is provided separately under:
 
-| Method | Macro F1 | Micro F1 | Exact Match |
-|--------|----------|----------|-------------|
-| C1 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 |
-| F1 | 0.0011 +/- 0.0015 | 0.0011 +/- 0.0015 | 0.0006 +/- 0.0008 |
-| F2 | 0.0011 +/- 0.0015 | 0.0011 +/- 0.0015 | 0.0006 +/- 0.0008 |
-| F3 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 | 0.0000 +/- 0.0000 |
+- `repairs/train_corrected.py`
+- `repairs/train_contracts.patch`
 
-## Key Findings
+The candidate repair is separate from the historical results and
+does not constitute regenerated historical evidence.
 
-1. F1 and F2 have identical recorded metrics at every seed on all three tasks. Equal scores do not establish whether clipping was inactive or whether it changed updates without changing thresholded scores.
+## Contract/oracle artifacts
 
-2. F3 has zero macro and micro F1 across all three datasets. This is a recorded performance failure, not proof that every prediction was empty. F3's BRIGHTER exact match is 0.1055 +/- 0.0000.
+Repository analysis artifacts are stored under:
 
-3. C1 also scores zero on both filtered tasks. Federation alone cannot explain the low ISEAR and GoEmotions performance.
+`data/repository_analysis/`
 
-4. Exploratory paired tests show no statistically distinguishable difference between C1 and F1/F2 on BRIGHTER (raw p = 0.7986, Holm-adjusted p = 1.0000), while comparisons with F3 yield adjusted p < 0.0001.
+These artifacts distinguish source-visible findings, deterministic
+contract checks, and bounded fixture/oracle evaluation.
 
-## Audit Findings
+## Figures and tables
 
-The four-layer audit scheme (data/tasks, training protocol, implementation, evidence/reproduction) identified:
+Historical figures and tables are retained. They are not silently
+replaced by candidate-repair results.
 
-- Mutable centralized checkpoint state: C1 saves best_state = model.state_dict() without a deep copy. The dictionary points to tensors that later training can change.
+The existing figure/table inventory and hashes are recorded in:
 
-- Unused federated validation argument: The federated routine accepts val_df but never uses it. It evaluates the final round, not the best round.
+`data/repository_analysis/figure_table_manifest.json`
 
-- Always-zero surprise target for ISEAR: Filtered ISEAR retains five sigmoid outputs, but surprise is always zero because ISEAR has no surprise examples.
+## Verification
 
-These findings limit the interpretation of score differences but do not establish their causes.
+Run:
 
-## Reproducibility Notes
+```bash
+python scripts/verify_software_contracts.py
+```
 
-- The released scores and progress records are included, but the release does not contain the checkpoints, predictions, dataset revisions, and environment records needed to reproduce training in full.
+The verification checks the preserved historical result structure
+and basic metric validity.
 
-- The analysis uses the supplied repository snapshot. File checks confirm that imported files match that snapshot, but they do not establish which code revision produced each checkpoint.
+## Interpretation
 
-- Recomputed means and sample standard deviations agree with the released summaries at four decimal places.
+The repository distinguishes:
 
-## Datasets
+- historical experimental observations;
+- software-contract findings;
+- bounded fixture/oracle checks; and
+- candidate repairs.
 
-| Dataset | Source | Task |
-|---------|--------|------|
-| BRIGHTER English | https://huggingface.co/datasets/brighter-dataset/BRIGHTER-emotion-categories | Multi-label, 5 emotions (joy, anger, fear, sadness, surprise) |
-| Filtered ISEAR | https://github.com/bdotloh/isear_dataset | 4 retained emotions (joy, fear, anger, sadness); surprise always zero |
-| Filtered GoEmotions | https://huggingface.co/datasets/google-research-datasets/go_emotions | 5-emotion subset (joy, anger, fear, sadness, surprise) |
-
-## How to Reproduce
-
-1. Open train.py in Google Colab with a T4 GPU.
-
-2. Install dependencies: pip install transformers datasets scikit-learn
-
-3. Set your Hugging Face token (for BRIGHTER dataset access).
-
-4. Run the script. Results are saved to results.csv and progress.json.
-
-5. For figure generation, use the analysis code with the saved CSV files.
-
-## Privacy Scope
-
-The code clips completed client updates and adds Gaussian noise. It does not implement per-example DP-SGD. No verified privacy accountant or formal (epsilon, delta) guarantee is claimed. The noise mechanism is DP-inspired only.
-
-## Limitations
-
-- The study does not independently rerun training.
-
-- The four-layer audit scheme has not been validated across independent codebases.
-
-- The three datasets are task settings within one shared implementation, not three independent software replications.
-
-- No new learning algorithm, reproducibility metric, or formal privacy guarantee is introduced.
+Original checkpoints, predictions, and the complete historical
+software environment are unavailable. Therefore contract-level
+checks should not be interpreted as full end-to-end reproduction
+of the historical training runs.
 
 ## Citation
 
-If you use this code or data, please cite:
-
-@article{dewangan2026auditing,
-  title={Auditing Centralized and Federated NLP Software: A Case Study of Released DistilBERT Emotion-Classification Experiments},
-  author={Dewangan, Girija Shankar and Roy, Partha and Tiwari, Rajesh},
-  journal={Preprint submitted to Elsevier},
-  year={2026}
-}
-
-## License
-
-This project is released for research and reproducibility purposes. Dataset use must follow the respective dataset licenses.
-
-## Contact
-
-For questions, please open an issue on GitHub.
+After the final repository commit is created, the manuscript
+reference should cite that immutable final commit rather than an
+earlier development commit.
